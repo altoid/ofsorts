@@ -4,24 +4,17 @@ import random
 from pprint import pprint, pformat
 
 
-def onepass(a, right):
-    j = right + 1
-    m = a[j]
-    while j > 0:
-        if a[j - 1] >= m:
-            a[j] = a[j - 1]
-            j -= 1
-        else:
-            break
-    a[j] = m
-
-
 def isort(a):
     # insertion sort grabs the next element from the unsorted part of the array
     l = len(a)
 
     for i in xrange(l - 1):
-        onepass(a, i)
+        j = i + 1
+        m = a[j]
+        while j > 0 and a[j - 1] >= m:
+            a[j] = a[j - 1]
+            j -= 1
+        a[j] = m
 
 
 def test_isort():
