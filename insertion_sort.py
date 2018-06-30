@@ -1,34 +1,46 @@
 #!/usr/bin/python
 
 import random
+from pprint import pprint, pformat
 
-def lessthan(test, pivot):
-    return test < pivot
 
-def greaterthan(test, pivot):
-    return pivot < test
+def onepass(a, right):
+    j = right + 1
+    m = a[j]
+    while j > 0:
+        if a[j - 1] >= m:
+            a[j] = a[j - 1]
+            j -= 1
+        else:
+            break
+    a[j] = m
+
 
 def isort(a):
-    # insertion sort grabs the next element from the unsorted part of the 
-    pass
-    
-def test_isort():
+    # insertion sort grabs the next element from the unsorted part of the array
+    l = len(a)
 
+    for i in xrange(l - 1):
+        onepass(a, i)
+
+
+def test_isort():
     nfrom = 0
-    nto = 15
-    nelements = 19
+    nto = 1511
+    nelements = 1000
 
     a = [random.randint(nfrom, nto) for x in range(nelements)]
 
-    isort(a, greaterthan)
+    isort(a)
 
-    if not sorted(a, reverse=True) == a:
+    if not sorted(a) == a:
         print a
 
-def main():
 
+def main():
     for i in range(100):
         test_isort()
+
 
 if __name__ == '__main__':
     main()
